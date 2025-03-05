@@ -118,13 +118,12 @@ optimize_mtu() {
 # DNS 优化模块
 optimize_dns() {
   echo -e "\n>>> 正在设置DNS配置..."
-  chattr -i "$RESOLV_CONF" 2>/dev/null
+  chattr -i "$RESOLV_CONF" 2>/dev/null  # 确保可写
   cat > "$RESOLV_CONF" <<EOF
 # 由脚本设置的DNS配置
 nameserver 1.1.1.1
 nameserver 8.8.8.8
 EOF
-  chattr +i "$RESOLV_CONF" 2>/dev/null || echo "警告：无法锁定 $RESOLV_CONF"
 }
 
 # TCP 优化模块
